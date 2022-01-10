@@ -40,7 +40,6 @@ public class Board {
 	@Lob // 대용량 데이터를 쓸때 씀
 	private String content; //섬머노트 라이브러리
 
-	@ColumnDefault("0")
 	private int count;
 	
 	@ManyToOne(fetch = FetchType.EAGER)  // Many = board , user = one 
