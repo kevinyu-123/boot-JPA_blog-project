@@ -39,3 +39,6 @@
 fetch = FetchType.LAZY = 지연로딩 / 프록시 객체를 1차 캐시에 저장(empty) 
 -영속성 컨텍스트를 서비스 종료시 끊지않고 컨트롤러 영역까지 지속시킨다. open in view 를 true로 설정해놔야 한다.
 -false 일시 서비스 종료시 끊어진다.
+
+### OAuth
+open auth : 인증처리를 대신 하게 해준다 
