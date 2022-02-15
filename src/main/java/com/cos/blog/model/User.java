@@ -32,7 +32,7 @@ public class User {
 	@GeneratedValue(strategy = GenerationType.IDENTITY) //프로젝트에서 연결된 DB의 넘버링 전략을 따라간다.
 	private int id; // auto_increment
 	
-	@Column(nullable=false,length=30,unique = true)
+	@Column(nullable=false,length=200,unique = true)
 	private String username; // 아이디
 	
 	@Column(nullable=false,length=100) //해쉬( 데이터베이스에 암호화 시켜 저장하기 때문에 넉넉하게 준다)
@@ -48,6 +48,7 @@ public class User {
 	@CreationTimestamp // 시간이 자동 입력
 	private Timestamp createDate;
 	
-	
+	// 사이트별 로그인 경로
+	private String oauth;
 
 }

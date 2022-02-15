@@ -46,15 +46,26 @@ public class UserService  {
 		User persistance = userRepository.findById(user.getId()).orElseThrow(()->{
 			return new IllegalArgumentException("회원찾기 실패");
 		});
+		
+		//validate 체크 oauth 값이 없을때만 수정이 가능하다.
+		if(persistance.getOauth()==null || persistance.getOauth().equals("")) {
 		String rawPwd = user.getPassword();
 		String encPwd = encoder.encode(rawPwd);
 		persistance.setPassword(encPwd);
-		persistance.setEmail(user.getEmail());
+		persistance.setEmail(user.getEmail());		
+		}
 		// 함수 종료 후 영속화된 객체에 변화가 감지되면 더티체킹을 통하여 update문이 실행
 		
 		
 	}
 	
+	@Transactional(readOnly = true)
+	public User findMember(String username) {		
+		User user = userRepository.findByUsername(username).orElseGet(()->{
+			return new User();
+		});
+		return user;
+	}
 	
 	
 	
