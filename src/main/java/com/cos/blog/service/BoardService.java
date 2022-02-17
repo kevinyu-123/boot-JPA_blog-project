@@ -11,14 +11,19 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.cos.blog.model.Board;
+import com.cos.blog.model.Reply;
 import com.cos.blog.model.User;
 import com.cos.blog.repository.BoardRepository;
+import com.cos.blog.repository.ReplyRepository;
 
 @Service
 public class BoardService  {
 	
 	@Autowired
 	private BoardRepository boardRepository;
+	
+	@Autowired
+	private ReplyRepository replyRepository;
 	
 	
 	// 회원가입
@@ -60,7 +65,18 @@ public class BoardService  {
 		//함수 종료시 트렌젝션이 종료된다. 더티체킹 - 자동 업데이트 db로 flush 됌
 	}
 	
-	
+	@Transactional
+	public void writeReply(User user, int boardId, Reply requestReply) {
+		Board board = boardRepository.findById(boardId)
+				.orElseThrow(()->{
+					return new IllegalArgumentException("게시글 아이디를 찾을 수 없습니다.");
+				}); 
+		
+		requestReply.setUser(user);
+		requestReply.setBoard(board);
+		
+		replyRepository.save(requestReply);
+	}
 	
 	
 	
