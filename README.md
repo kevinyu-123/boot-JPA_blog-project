@@ -44,3 +44,6 @@ fetch = FetchType.LAZY = 지연로딩 / 프록시 객체를 1차 캐시에 저�
 
 ### OAuth
 open auth : 인증처리를 대신 하게 해준다 
+
+### Cascade 옵션
+게시글 삭제시 삭제가 안되는 문제를 cascade = cascadeType.REMOVE 옵션을 주어 
