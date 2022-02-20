@@ -49,12 +49,10 @@ let index = {
 	},
 	
 		update: function(){
-		let id = $("#id").val();
-			
+		let id = $("#id").val();		
 		let data = {
 			title: $("#title").val(),
-			content: $("#content").val()
-		
+			content: $("#content").val()		
 		}	
 		$.ajax({
 			type: "PUT",
@@ -89,6 +87,19 @@ let index = {
 		}); 
 	},
 	
+	replyDelete: function(boardId,replyId){
+		
+		$.ajax({
+			type: "DELETE",
+			url: `/api/board/${boardId}/reply/${replyId}`,
+			dataType: "json",
+		}).done(function(response){
+			alert("댓글이 성공적으로 삭제되었습니다");
+			location.href=`/board/${boardId}`;
+		}).fail(function(error){
+			alert(JSON.stringify(error));
+		}); 
+	},
 }
 
 index.init();

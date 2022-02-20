@@ -48,13 +48,19 @@ public class BoardApiController {
 		
 	}
 	
+	
 	@PostMapping("/api/board/{boardId}/reply")
-	public ResponseDTO<Integer>replySave(@PathVariable int boardId,@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal){
-		
+	public ResponseDTO<Integer>replySave(@PathVariable int boardId,@RequestBody Reply reply, @AuthenticationPrincipal PrincipalDetail principal){	
 		boardService.writeReply(principal.getUser(),boardId,reply);
 		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
 	}
 	
+	@DeleteMapping("/api/board/{boardId}/reply/{replyId}")
+	public ResponseDTO<Integer> replyDelete(@PathVariable int replyId){
+		boardService.replyDelete(replyId);
+		return new ResponseDTO<Integer>(HttpStatus.OK.value(),1);
+	}
+
 	
 	
 	
