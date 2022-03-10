@@ -1,0 +1,52 @@
+version: "3"
+
+services:
+  database:
+    image: mysql:latest
+    platform: linux/x86_64
+    environment:
+      MYSQL_ROOT_PASSWORD: tntor123
+      MYSQL_DATABASE: blog
+      MYSQL_USER: user
+      MYSQL_PASSWORD: tntor123
+
+    container_name: mysqlDB
+
+    ports:
+      - "3307:3306"
+
+    restart: always
+
+    volumes:
+      - /Users/yuhyeonjoon/TestFile:/var/lib/mysql
+
+    command: ['--character-set-server=utf8mb4', '--collation-server=utf8mb4_unicode_ci']
+
+    networks:
+      - spring-net2
+
+  app:
+    build:
+      dockerfile: Dockerfile
+
+    environment:
+      SPRING_DATASOURCE_URL: jdbc:mysql://mysqlDB:3306/blog?serverTimezone=Asia/Seoul
+      SPRING_DATASOURCE_USERNAME: user
+      SPRING_DATASOURCE_PASSWORD: tntor123
+
+    ports:
+      - "8000:8000"
+    depends_on:
+      - database
+    container_name: blog
+
+    volumes:
+      - ./:/app
+    restart: always
+
+    networks:
+      - spring-net2
+
+networks:
+  spring-net2:
+
