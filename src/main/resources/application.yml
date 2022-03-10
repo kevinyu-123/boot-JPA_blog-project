@@ -12,8 +12,8 @@ spring:
 
   datasource:
     driver-class-name: com.mysql.cj.jdbc.Driver
-    url: jdbc:mysql://localhost:3306/blog?serverTimezone=Asia/Seoul
-    username: root
+    url: jdbc:mysql://mysqlDB:3306/blog?serverTimezone=Asia/Seoul
+    username: user
     password: tntor123
   jpa:
     open-in-view: true
